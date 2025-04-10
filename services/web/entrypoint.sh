@@ -23,9 +23,9 @@ python manage.py db migrate
 echo "Applying migrations..."
 python manage.py db upgrade
 
-# Seed the database
-echo "Seeding initial data..."
-python manage.py seed_db
+# Load mock data
+echo "Loading mock data..."
+python -m project.load_mock_data
 
 echo "Initialization completed!"
 

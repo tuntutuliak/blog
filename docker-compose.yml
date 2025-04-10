@@ -3,7 +3,6 @@ version: '3.8'
 services:
   web:
     build: ./services/web
-    command: python manage.py run -h 0.0.0.0
     volumes:
       - ./services/web/:/usr/src/app/
     ports:
@@ -17,6 +16,9 @@ services:
       - FLASK_APP=project/__init__.py
       - FLASK_ENV=development
       - FLASK_DEBUG=1
+    command: >
+      sh -c "python manage.py run -h 0.0.0.0 &
+             python -m project.load_mock_data"
   db:
     image: postgres:13-alpine
     volumes:
