@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ "$DATABASE" = "postgres" ]
 then
@@ -11,7 +11,22 @@ then
     echo "PostgreSQL started"
 fi
 
-python manage.py create_db
-python project/data/load_mock_data.py
+# Initialize migrations
+echo "Initializing migrations..."
+python manage.py db init
 
-exec "$@"
+# Create migrations
+echo "Creating migrations..."
+python manage.py db migrate
+
+# Apply migrations
+echo "Applying migrations..."
+python manage.py db upgrade
+
+# Seed the database
+echo "Seeding initial data..."
+python manage.py seed_db
+
+echo "Initialization completed!"
+
+exec "$@" 

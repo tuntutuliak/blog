@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH /usr/src/app
 
 # install system dependencies
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update && apt-get install -y netcat dos2unix
 
 # install dependencies
 RUN pip install --upgrade pip
@@ -19,6 +19,13 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . /usr/src/app/
+
+# convert line endings
+RUN dos2unix /usr/src/app/entrypoint.sh
+RUN chmod +x /usr/src/app/entrypoint.sh
+
+# run entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
 
 # run app
 CMD ["python", "manage.py", "run", "-h", "0.0.0.0"]
