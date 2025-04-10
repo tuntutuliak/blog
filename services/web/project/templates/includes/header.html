@@ -1,0 +1,89 @@
+<!-- Page Header-->
+<header class="section page-header">
+  <!-- RD Navbar-->
+  <div class="rd-navbar-wrap">
+    <nav class="rd-navbar rd-navbar-thin" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-fixed" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+      <div class="rd-navbar-main-outer">
+        <div class="rd-navbar-main">
+          <!-- RD Navbar Panel-->
+          <div class="rd-navbar-panel">
+            <!-- RD Navbar Toggle-->
+            <button class="rd-navbar-toggle" data-rd-navbar-toggle="#rd-navbar-nav-wrap-NaN"><span></span></button>
+            <!-- RD Navbar Brand-->
+            <a class="rd-navbar-brand" href="{{ url_for('main.index') }}">
+              <img src="{{ url_for('static', filename='images/logo-default-135x43.png') }}" alt="" width="135" height="43"/>
+            </a>
+            <div class="rd-navbar-block">
+              <ul class="list-inline-bordered">
+                <li>
+                  <button class="rd-navbar-popup-toggle text-uppercase font-weight-light" data-rd-navbar-toggle="#rd-navbar-login-NaN">
+                    <span class="mdi mdi-pencil"><span class="hidden-info font-weight-light"> Book now</span></span>
+                  </button>
+                  <div class="rd-navbar-popup" id="rd-navbar-login-NaN">
+                    <h4>Book now</h4>
+                    <form class="rd-form rd-form-small" method="POST" action="{{ url_for('main.book') }}">
+                      <div class="form-wrap">
+                        <input class="form-input" id="register-name-1NaN" type="text" name="check_in" data-constraints="@Required">
+                        <label class="form-label" for="register-name-1NaN">Check in</label>
+                      </div>
+                      <div class="form-wrap">
+                        <input class="form-input" id="register-name-2NaN" type="text" name="check_out" data-constraints="@Required">
+                        <label class="form-label" for="register-name-2NaN">Check out</label>
+                      </div>
+                      <div class="form-wrap">
+                        <input class="form-input" id="register-name-3NaN" type="text" name="guests" data-constraints="@Required">
+                        <label class="form-label" for="register-name-3NaN">Guests</label>
+                      </div>
+                      <div class="form-wrap">
+                        <button class="button button-block button-primary button-winona" type="submit">Book Now</button>
+                      </div>
+                    </form>
+                  </div>
+                </li>
+                <li><a class="link-title" href="tel:#"><span class="mdi mdi-cellphone-android"><span class="text-subtitle hidden-info font-weight-light"> +1-800-1234-567</span></span></a></li>
+              </ul>
+              <button class="rd-navbar-search-toggle" data-rd-navbar-toggle="#rd-navbar-search-NaN"><span></span></button>
+            </div>
+          </div>
+          <!-- RD Navbar Search-->
+          <div class="rd-navbar-search" id="rd-navbar-search-NaN">
+            <form class="rd-search" action="{{ url_for('main.search') }}" data-search-live="rd-search-results-live-NaN" method="GET">
+              <div class="form-wrap">
+                <label class="form-label" for="rd-navbar-search-form-input-NaN">Search...</label>
+                <input class="form-input rd-navbar-search-form-input" id="rd-navbar-search-form-input-NaN" type="text" name="q" autocomplete="off">
+                <div class="rd-search-results-live" id="rd-search-results-live-NaN"></div>
+              </div>
+              <button class="rd-search-form-submit fa-search" type="submit"></button>
+            </form>
+          </div>
+          <div class="rd-navbar-nav-wrap" id="rd-navbar-nav-wrap-NaN">
+            <!-- RD Navbar Brand-->
+            <a class="rd-navbar-brand" href="{{ url_for('main.index') }}">
+              <img src="{{ url_for('static', filename='images/logo-default-135x43.png') }}" alt="" width="135" height="43"/>
+            </a>
+            <!-- RD Navbar Nav-->
+            <ul class="rd-navbar-nav">
+              <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('main.index') }}">Home</a></li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('main.about') }}">About Us</a></li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('main.cruises') }}">Cruises</a>
+                <!-- RD Navbar Dropdown-->
+                <ul class="rd-menu rd-navbar-dropdown">
+                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('main.single_cruise') }}">Single Cruise</a></li>
+                </ul>
+              </li>
+              <li class="rd-nav-item {% if request.endpoint.startswith('blog.') %}active{% endif %}"><a class="rd-nav-link" href="{{ url_for('blog.index') }}">Blog</a>
+                <!-- RD Navbar Dropdown-->
+                <ul class="rd-menu rd-navbar-dropdown">
+                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.grid') }}">Grid Blog</a></li>
+                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.sidebar') }}">Sidebar Blog</a></li>
+                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.single_post', post_id=1) }}">Single Blog Post</a></li>
+                </ul>
+              </li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="{{ url_for('main.contacts') }}">Contacts</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header> 

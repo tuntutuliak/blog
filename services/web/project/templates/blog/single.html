@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<!-- Breadcrumbs -->
+<section class="breadcrumbs-custom bg-image context-dark" style="background-image: url({{ url_for('static', filename='images/bg-single-blog-post.jpg') }});">
+  <div class="breadcrumbs-custom-inner">
+    <div class="container breadcrumbs-custom-container">
+      <div class="breadcrumbs-custom-main">
+        <h6 class="breadcrumbs-custom-subtitle title-decorated">Blog</h6>
+        <h1 class="breadcrumbs-custom-title">{{ post.title }}</h1>
+      </div>
+      <ul class="breadcrumbs-custom-path">
+        <li><a href="{{ url_for('main.index') }}">Home</a></li>
+        <li><a href="{{ url_for('blog.index') }}">Blog</a></li>
+        <li class="active">{{ post.title }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section section-lg">
+  <div class="container">
+    <div class="row row-50">
+      <div class="col-lg-8">
+        <article class="post-creative">
+          <h3 class="post-creative-title font-weight-bold text-gray-800">{{ post.title }}</h3>
+          <ul class="post-creative-meta">
+            <li><span class="icon mdi mdi-calendar-clock"></span>
+              <time datetime="{{ post.created_at }}">{{ post.created_at.strftime('%B %d, %Y at %I:%M %p') }}</time>
+            </li>
+            <li><span class="icon mdi mdi-tag-multiple"></span><a href="{{ url_for('blog.category', category=post.category) }}">{{ post.category }}</a></li>
+          </ul>
+          
+          {% if post.image %}
+          <img src="{{ url_for('static', filename=post.image) }}" alt="{{ post.title }}" class="img-fluid mb-4"/>
+          {% endif %}
+          
+          <div class="post-content">
+            {{ post.content|safe }}
+          </div>
+          
+          <ul class="post-creative-footer">
+            <li>Share this post!</li>
+            <li>
+              <div class="group group-xs group-middle">
+                <a class="icon icon-sm icon-creative mdi mdi-facebook" href="#"></a>
+                <a class="icon icon-sm icon-creative mdi mdi-twitter" href="#"></a>
+                <a class="icon icon-sm icon-creative mdi mdi-instagram" href="#"></a>
+                <a class="icon icon-sm icon-creative mdi mdi-google" href="#"></a>
+                <a class="icon icon-sm icon-creative mdi mdi-linkedin" href="#"></a>
+              </div>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Comments Section -->
+        <div class="section-sm">
+          <h3 class="post-creative-title text-gray-800 font-weight-light">Comments</h3>
+          {% if comments %}
+            {% for comment in comments %}
+            <div class="comment-classic-group">
+              <article class="comment-classic">
+                <figure class="comment-classic-figure">
+                  <img class="comment-classic-image" src="{{ url_for('static', filename=comment.user.avatar) }}" alt="" width="48" height="48"/>
+                </figure>
+                <div class="comment-classic-main">
+                  <p class="comment-classic-name">{{ comment.user.name }}</p>
+                  <div class="comment-classic-text">
+                    <p class="text-gray-800">{{ comment.content }}</p>
+                  </div>
+                  <ul class="comment-classic-meta">
+                    <li>
+                      <time datetime="{{ comment.created_at }}">{{ comment.created_at.strftime('%B %d, %Y at %I:%M %p') }}</time>
+                    </li>
+                    <li><a class="comment-classic-reply" href="#" aria-label="reply"></a></li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+            {% endfor %}
+          {% else %}
+            <p>No comments yet. Be the first to comment!</p>
+          {% endif %}
+        </div>
+
+        <!-- Comment Form -->
+        <div class="section-sm section-bottom-0">
+          <h3 class="post-creative-title text-gray-800 font-weight-light">Send a Comment</h3>
+          <form class="rd-form rd-mailform" method="post" action="{{ url_for('blog.add_comment', post_id=post.id) }}">
+            <div class="row row-10">
+              <div class="col-md-6">
+                <div class="form-wrap">
+                  <label class="form-label-outside" for="comment-first-name">First Name</label>
+                  <input class="form-input" id="comment-first-name" type="text" name="first_name" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-wrap">
+                  <label class="form-label-outside" for="comment-last-name">Last Name</label>
+                  <input class="form-input" id="comment-last-name" type="text" name="last_name" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-wrap">
+                  <label class="form-label-outside" for="comment-email">E-mail</label>
+                  <input class="form-input" id="comment-email" type="email" name="email" required>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-wrap">
+                  <label class="form-label-outside" for="comment-message">Your Message</label>
+                  <textarea class="form-input" id="comment-message" name="message" required></textarea>
+                </div>
+              </div>
+            </div>
+            <button class="button button-primary button-winona" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="col-lg-4">
+        <!-- Author Profile -->
+        <article class="profile-thin">
+          <div class="profile-thin-aside">
+            <img class="profile-thin-image" src="{{ url_for('static', filename=post.author.avatar) }}" alt="" width="168" height="168"/>
+            <a class="profile-thin-contact-button" href="mailto:{{ post.author.email }}">
+              <span class="icon mdi mdi-email-outline"></span>
+            </a>
+          </div>
+          <div class="profile-thin-main">
+            <p class="profile-thin-title">{{ post.author.name }}</p>
+            <p class="profile-thin-subtitle">{{ post.author.role }}</p>
+            <p>{{ post.author.bio }}</p>
+            <div class="group group-xs group-middle">
+              <a class="icon icon-sm icon-creative mdi mdi-facebook" href="{{ post.author.facebook }}"></a>
+              <a class="icon icon-sm icon-creative mdi mdi-twitter" href="{{ post.author.twitter }}"></a>
+              <a class="icon icon-sm icon-creative mdi mdi-instagram" href="{{ post.author.instagram }}"></a>
+              <a class="icon icon-sm icon-creative mdi mdi-linkedin" href="{{ post.author.linkedin }}"></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Categories Widget -->
+        <div class="blog-layout-aside-item">
+          <p class="blog-layout-aside-title">Categories</p>
+          <ul class="list-marked">
+            {% for category in categories %}
+            <li><a href="{{ url_for('blog.category', category=category.name) }}">{{ category.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Tags Widget -->
+        <div class="blog-layout-aside-item">
+          <p class="blog-layout-aside-title">Tags</p>
+          <ul class="list-inline-comma">
+            {% for tag in tags %}
+            <li><a href="{{ url_for('blog.tag', tag=tag.name) }}">{{ tag.name }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %} 

@@ -1,0 +1,71 @@
+<!-- Page Footer-->
+<footer class="section footer-linked bg-gray-750">
+  <div class="footer-linked-main">
+    <div class="container">
+      <div class="row row-50">
+        <div class="col-lg-8">
+          <h4 class="text-title-footer">Quick Links</h4>
+          <hr class="offset-right-1">
+          <div class="row row-20">
+            <div class="col-6 col-sm-3">
+              <ul class="list list-xs">
+                <li><a href="{{ url_for('main.cruises') }}">All Cruises</a></li>
+                <li><a href="{{ url_for('main.single_cruise') }}">Classic Cruises</a></li>
+                <li><a href="{{ url_for('main.single_cruise') }}">Luxury Cruises</a></li>
+                <li><a href="{{ url_for('main.single_cruise') }}">Family Cruises</a></li>
+                <li><a href="{{ url_for('main.single_cruise') }}">Adventure Cruises</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-sm-3">
+              <ul class="list list-xs">
+                <li><a href="{{ url_for('blog.index') }}">News</a></li>
+                <li><a href="{{ url_for('main.about') }}">About Us</a></li>
+                <li><a href="{{ url_for('auth.login') }}">Login Page</a></li>
+                <li><a href="{{ url_for('auth.register') }}">Registration Page</a></li>
+                <li><a href="{{ url_for('main.careers') }}">Careers</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-sm-3">
+              <ul class="list list-xs">
+                <li><a href="{{ url_for('main.contacts') }}">Contacts</a></li>
+                <li><a href="{{ url_for('main.gallery') }}">Gallery</a></li>
+                <li><a href="{{ url_for('main.single_cruise') }}">Single Cruise</a></li>
+                <li><a href="{{ url_for('main.history') }}">Our History</a></li>
+                <li><a href="{{ url_for('main.booking') }}">Booking</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-sm-3">
+              <ul class="list list-xs">
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+                <li><a href="#">Pinterest</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 col-lg-4">
+          <h4 class="text-title-footer">Contact Information</h4>
+          <hr>
+          <ul class="list-sm">
+            <li class="object-inline"><span class="icon icon-md mdi mdi-map-marker"></span><a class="link-default" href="#">2130 Fulton Street San Diego, CA <br> 94117-1080 USA</a></li>
+            <li class="object-inline"><span class="icon icon-md mdi mdi-phone"></span>
+              <ul class="list-0">
+                <li><a class="link-default" href="tel:#">1-800-1234-678</a></li>
+                <li><a class="link-default" href="tel:#">1-800-8765-098</a></li>
+              </ul>
+            </li>
+            <li class="object-inline"><span class="icon icon-md mdi mdi-email"></span><a class="link-default" href="mailto:#">info@demolink.org</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-linked-aside">
+    <div class="container">
+      <!-- Rights-->
+      <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>All Rights Reserved.</span><span>&nbsp;</span><br class="d-sm-none"/><a href="{{ url_for('main.terms') }}">Terms of Use</a><span> and</span><span>&nbsp;</span><a href="{{ url_for('main.privacy') }}">Privacy Policy</a></p>
+    </div>
+  </div>
+</footer> 

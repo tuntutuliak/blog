@@ -1,0 +1,40 @@
+<aside class="sidebar">
+    <div class="widget categories">
+        <h3 class="widget-title">Категории</h3>
+        <ul class="list-unstyled">
+            {% for category in categories %}
+            <li>
+                <a href="{{ url_for('blog.category', category=category.name) }}">
+                    {{ category.name }}
+                    <span class="badge bg-primary">{{ category.posts|length }}</span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    
+    <div class="widget tags">
+        <h3 class="widget-title">Теги</h3>
+        <div class="tag-cloud">
+            {% for tag in tags %}
+            <a href="{{ url_for('blog.tag', tag=tag.name) }}" class="tag">
+                {{ tag.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="widget popular-posts">
+        <h3 class="widget-title">Популярные статьи</h3>
+        <ul class="list-unstyled">
+            {% for post in popular_posts %}
+            <li>
+                <a href="{{ url_for('blog.post_detail', post_id=post.id) }}">
+                    {{ post.title }}
+                </a>
+                <small class="text-muted">{{ post.created_at.strftime('%d.%m.%Y') }}</small>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</aside> 
