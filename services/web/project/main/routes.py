@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from project.main import bp
 from project.models import Post, Category, Tag
 from project import db
@@ -20,7 +20,8 @@ def index():
 
 @bp.route('/about')
 def about():
-    return render_template('main/about.html')
+    latest_posts = Post.query.order_by(Post.created_at.desc()).limit(4).all()
+    return render_template('main/about.html', latest_posts=latest_posts)
 
 @bp.route('/cruises')
 def cruises():

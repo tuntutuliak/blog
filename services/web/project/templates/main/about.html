@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}О нас{% endblock %}
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<!-- Breadcrumbs -->
+<section class="breadcrumbs-custom bg-image context-dark" style="background-image: url({{ url_for('static', filename='images/bg-about-us.jpg') }});">
+  <div class="breadcrumbs-custom-inner">
+    <div class="container breadcrumbs-custom-container">
+      <div class="breadcrumbs-custom-main">
+        <h6 class="breadcrumbs-custom-subtitle title-decorated">О нас</h6>
+        <h1 class="breadcrumbs-custom-title">О нас</h1>
+      </div>
+      <ul class="breadcrumbs-custom-path">
+        <li><a href="{{ url_for('main.index') }}">Главная</a></li>
+        <li class="active">О нас</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!--Overview-->
+<section class="section section-lg right-pattern">
+  <div class="container">
+    <div class="row row-50 justify-content-center justify-content-lg-between">
+      <div class="col-md-10 col-lg-6">
+        <h2 class="wow-outer font-weight-bold text-gray-800"><span class="wow slideInUp">Обзор</span></h2>
+        <h5 class="offset-top-3 text-gray-800 font-weight-light">Мы предлагаем незабываемые круизные путешествия по всему миру</h5>
+        <p>Наша компания специализируется на организации круизных туров высочайшего качества. Мы работаем с лучшими круизными лайнерами и предлагаем разнообразные маршруты, подходящие как для семейного отдыха, так и для романтических путешествий.</p>
+        <div class="group group-middle">
+          <a class="button button-primary button-winona button-secondary" href="#our-history" data-waypoint-to="#our-history">Наша История</a>
+          <a class="button button-icon button-icon-left button-primary-outline button-winona button-secondary" href="#">
+            <span class="icon mdi mdi-facebook-messenger facebook-icon"></span>Messenger
+          </a>
+        </div>
+      </div>
+      <div class="col-md-10 col-lg-6 col-xl-5">
+        <img class="img-responsive" src="{{ url_for('static', filename='images/large-features-1-560x480.png') }}" alt="" width="560" height="480"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--Our history-->
+<section class="section section-lg bg-image-1" style="background-image: url({{ url_for('static', filename='images/our-history-1920x1616.jpg') }});" id="our-history">
+  <div class="container">
+    <!-- Timeline Classic-->
+    <article class="timeline-classic">
+      <div class="timeline-classic-item">
+        <div class="timeline-classic-item-aside">
+          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/timeline-1-390x250.jpg') }}" alt="" width="390" height="250"/>
+        </div>
+        <div class="timeline-classic-item-divider"></div>
+        <div class="timeline-classic-item-main">
+          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Разнообразные Круизы</span></h2>
+          <h5 class="offset-top-3 text-white font-weight-light">Широкий выбор маршрутов и направлений</h5>
+          <p class="text-white-darker">Мы предлагаем круизы различной длительности и направленности: от коротких weekend-круизов до длительных кругосветных путешествий. Каждый маршрут тщательно продуман и включает посещение самых интересных портов и достопримечательностей.</p>
+        </div>
+      </div>
+      <div class="timeline-classic-item">
+        <div class="timeline-classic-item-aside">
+          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/timeline-2-390x250.jpg') }}" alt="" width="390" height="250"/>
+        </div>
+        <div class="timeline-classic-item-divider"></div>
+        <div class="timeline-classic-item-main">
+          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Незабываемые Впечатления</span></h2>
+          <h5 class="offset-top-3 text-white font-weight-light">Каждое путешествие - это особенное приключение</h5>
+          <p class="text-white-darker">На борту наших круизных лайнеров вас ждет первоклассный сервис, разнообразные развлечения и изысканная кухня. Мы создаем все условия для того, чтобы ваш отдых был максимально комфортным и запоминающимся.</p>
+        </div>
+      </div>
+      <div class="timeline-classic-item">
+        <div class="timeline-classic-item-aside">
+          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/timeline-3-390x250.jpg') }}" alt="" width="390" height="250"/>
+        </div>
+        <div class="timeline-classic-item-divider"></div>
+        <div class="timeline-classic-item-main">
+          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Лучший Сервис</span></h2>
+          <h5 class="offset-top-3 text-white font-weight-light">Индивидуальный подход к каждому клиенту</h5>
+          <p class="text-white-darker">Наша команда профессионалов обеспечивает высочайший уровень обслуживания на всех этапах путешествия. Мы внимательно относимся к пожеланиям каждого клиента и стремимся превзойти все ожидания.</p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!--Testimonials-->
+<section class="section section-lg text-center">
+  <div class="container">
+    <h2 class="wow-outer font-weight-bold text-gray-800"><span class="wow slideInUp">Отзывы</span></h2>
+    <div class="slick-widget-testimonials wow fadeIn">
+      <div class="slick-slider carousel-parent" data-arrows="false" data-loop="true" data-dots="false" data-swipe="false" data-items="1" data-child="#child-carousel">
+        <div class="item">
+          <blockquote class="quote-light">
+            <cite class="quote-light-cite">Елена Петрова</cite>
+            <p class="quote-light-caption">Постоянный клиент</p>
+            <div class="quote-light-text">
+              <p>Это было потрясающее путешествие! Прекрасный сервис, внимательный персонал и незабываемые впечатления. Обязательно воспользуюсь услугами компании снова.</p>
+            </div>
+          </blockquote>
+        </div>
+        <div class="item">
+          <blockquote class="quote-light">
+            <cite class="quote-light-cite">Александр Иванов</cite>
+            <p class="quote-light-caption">Постоянный клиент</p>
+            <div class="quote-light-text">
+              <p>Отличная организация круиза! Все было продумано до мелочей. Особенно порадовала насыщенная развлекательная программа и экскурсии.</p>
+            </div>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Blog Posts-->
+<section class="section section-md bg-gray-100">
+  <div class="container">
+    <h2 class="title-indent text-center wow-outer font-weight-bold text-gray-800">
+      <span class="wow slideInUp">Последние Записи Блога</span>
+    </h2>
+    <div class="row row-50 justify-content-center justify-content-lg-start">
+      {% for post in latest_posts %}
+      <div class="col-md-10 col-lg-6 wow-outer">
+        <article class="post-block bg-gray-700">
+          {% if post.image %}
+          <img class="post-block-image" src="{{ url_for('static', filename=post.image) }}" alt="" width="637" height="456"/>
+          {% endif %}
+          <div class="post-block-caption">
+            <ul class="post-block-meta">
+              <li class="wow-outer"><span class="wow slideInLeft">{{ post.author.email if post.author else 'Админ' }}</span></li>
+              <li class="wow-outer">
+                <time class="wow slideInLeft" datetime="{{ post.created_at.strftime('%Y-%m-%d') }}">
+                  {{ post.created_at.strftime('%d.%m.%Y') }}
+                </time>
+              </li>
+            </ul>
+            <h4 class="post-block-title">
+              <a href="{{ url_for('blog.post', post_id=post.id) }}">{{ post.title }}</a>
+            </h4>
+          </div>
+        </article>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include 'includes/footer.html' %}
+{% endblock %} 
