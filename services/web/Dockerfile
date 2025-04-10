@@ -1,5 +1,5 @@
 # pull official base image
-FROM python:3.11.3-slim-buster
+FROM python:3.9.5-slim-buster
 
 # set work directory
 WORKDIR /usr/src/app
@@ -7,9 +7,10 @@ WORKDIR /usr/src/app
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PYTHONPATH /usr/src/app
 
 # install system dependencies
-RUN apt-get update && apt-get install -y netcat curl
+RUN apt-get update && apt-get install -y netcat
 
 # install dependencies
 RUN pip install --upgrade pip
@@ -18,3 +19,6 @@ RUN pip install -r requirements.txt
 
 # copy project
 COPY . /usr/src/app/
+
+# run app
+CMD ["python", "manage.py", "run", "-h", "0.0.0.0"]

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="wide wow-animation" lang="en">
   <head>
-    <title>{% block title %}Sidebar Blog{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0 maximum-scale=1.0 user-scalable=0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,14 +16,12 @@
   </head>
   <body>
     <div class="page">
-      {% include 'includes/header.html' %}
-      
       {% block content %}{% endblock %}
-      
-      {% include 'includes/footer.html' %}
     </div>
     <div class="preloader">
-      <div class="preloader-logo"><img src="{{ url_for('static', filename='images/logo-default-135x43.png') }}" alt="" width="135" height="43"/></div>
+      <div class="preloader-logo">
+        <img src="{{ url_for('static', filename='images/logo-default-135x43.png') }}" alt="" width="135" height="43" srcset="{{ url_for('static', filename='images/logo-default-135x43.png') }} 2x"/>
+      </div>
       <div class="preloader-body">
         <div id="loadingProgressG">
           <div class="loadingProgressG" id="loadingProgressG_1"></div>

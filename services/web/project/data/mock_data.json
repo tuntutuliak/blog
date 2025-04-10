@@ -1,0 +1,106 @@
+{
+  "users": [
+    {
+      "email": "admin@example.com",
+      "active": true,
+      "name": "John Smith",
+      "role": "Chief Editor",
+      "bio": "Experienced travel writer with over 10 years in the cruise industry",
+      "avatar": "images/users/admin-avatar.jpg",
+      "facebook": "https://facebook.com/johnsmith",
+      "twitter": "https://twitter.com/johnsmith",
+      "instagram": "https://instagram.com/johnsmith",
+      "linkedin": "https://linkedin.com/in/johnsmith"
+    },
+    {
+      "email": "sarah@example.com",
+      "active": true,
+      "name": "Sarah Johnson",
+      "role": "Travel Writer",
+      "bio": "Passionate about discovering new cruise destinations",
+      "avatar": "images/users/sarah-avatar.jpg",
+      "facebook": "https://facebook.com/sarahjohnson",
+      "twitter": "https://twitter.com/sarahjohnson",
+      "instagram": "https://instagram.com/sarahjohnson",
+      "linkedin": "https://linkedin.com/in/sarahjohnson"
+    }
+  ],
+  "categories": [
+    {
+      "name": "News",
+      "description": "Latest cruise news and updates from around the world"
+    },
+    {
+      "name": "Cruises",
+      "description": "Detailed information about different cruise types and experiences"
+    },
+    {
+      "name": "Traveling",
+      "description": "Travel guides, tips, and destination reviews"
+    },
+    {
+      "name": "Tips",
+      "description": "Expert advice for making the most of your cruise vacation"
+    },
+    {
+      "name": "Ships",
+      "description": "Reviews and information about cruise ships and fleets"
+    }
+  ],
+  "tags": [
+    {"name": "Cruises"},
+    {"name": "Tips"},
+    {"name": "Ships"},
+    {"name": "Recommendations"},
+    {"name": "Traveling"},
+    {"name": "News"},
+    {"name": "Family"},
+    {"name": "Luxury"},
+    {"name": "Adventure"},
+    {"name": "Caribbean"}
+  ],
+  "posts": [
+    {
+      "title": "Why Choose Cruises Instead of Tours",
+      "content": "<p>Cruising offers a unique way to explore multiple destinations while enjoying luxury accommodations. Unlike traditional tours, cruise ships provide:</p><ul><li>Unpack once, visit multiple destinations</li><li>All-inclusive dining and entertainment</li><li>Luxury accommodations that travel with you</li><li>Ocean views and sea breezes</li></ul><p>Modern cruise ships are floating resorts with everything you need for a perfect vacation...</p>",
+      "image": "images/blog/cruise-vs-tour.jpg",
+      "category": "Tips",
+      "tags": ["Cruises", "Tips", "Recommendations"],
+      "author_email": "admin@example.com"
+    },
+    {
+      "title": "5 Adventure Cruises You Cannot Miss",
+      "content": "<p>For thrill-seekers and nature enthusiasts, these adventure cruises offer unforgettable experiences:</p><ul><li>Alaska Glacier Expedition</li><li>Galapagos Wildlife Discovery</li><li>Norwegian Fjords Explorer</li><li>Antarctic Peninsula Journey</li><li>Amazon River Expedition</li></ul><p>Each of these cruises combines luxury with adventure...</p>",
+      "image": "images/blog/adventure-cruises.jpg",
+      "category": "Cruises",
+      "tags": ["Adventure", "Cruises", "Recommendations"],
+      "author_email": "sarah@example.com"
+    },
+    {
+      "title": "Best Caribbean Cruise Destinations 2024",
+      "content": "<p>The Caribbean remains a top cruise destination, with these islands standing out in 2024:</p><ul><li>St. Maarten's New Port Facilities</li><li>Barbados' Cultural Experiences</li><li>Jamaica's Adventure Tours</li><li>Bahamas' Private Islands</li></ul><p>Each destination offers unique experiences and unforgettable memories...</p>",
+      "image": "images/blog/caribbean-destinations.jpg",
+      "category": "Traveling",
+      "tags": ["Caribbean", "Traveling", "Tips"],
+      "author_email": "admin@example.com"
+    }
+  ],
+  "comments": [
+    {
+      "post_title": "Why Choose Cruises Instead of Tours",
+      "first_name": "Michael",
+      "last_name": "Brown",
+      "email": "michael@example.com",
+      "content": "Great comparison! I especially appreciate the point about unpacking once. It makes traveling so much more convenient.",
+      "created_at": "2024-01-15T10:30:00"
+    },
+    {
+      "post_title": "5 Adventure Cruises You Cannot Miss",
+      "first_name": "Emma",
+      "last_name": "Wilson",
+      "email": "emma@example.com",
+      "content": "The Galapagos cruise is amazing! I did it last year and the wildlife experiences were unforgettable.",
+      "created_at": "2024-01-16T15:45:00"
+    }
+  ]
+} 

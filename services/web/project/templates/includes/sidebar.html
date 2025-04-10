@@ -6,7 +6,7 @@
             <li>
                 <a href="{{ url_for('blog.category', category=category.name) }}">
                     {{ category.name }}
-                    <span class="badge bg-primary">{{ category.posts|length }}</span>
+                    <span class="badge bg-primary">{{ category.posts.count() }}</span>
                 </a>
             </li>
             {% endfor %}
@@ -29,7 +29,7 @@
         <ul class="list-unstyled">
             {% for post in popular_posts %}
             <li>
-                <a href="{{ url_for('blog.post_detail', post_id=post.id) }}">
+                <a href="{{ url_for('blog.post', post_id=post.id) }}">
                     {{ post.title }}
                 </a>
                 <small class="text-muted">{{ post.created_at.strftime('%d.%m.%Y') }}</small>

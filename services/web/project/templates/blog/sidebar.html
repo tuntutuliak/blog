@@ -3,6 +3,8 @@
 {% block title %}Sidebar Blog{% endblock %}
 
 {% block content %}
+{% include 'includes/header.html' %}
+
 <!-- Breadcrumbs -->
 <section class="breadcrumbs-custom bg-image context-dark" style="background-image: url({{ url_for('static', filename='images/bg-about-us.jpg') }});">
   <div class="breadcrumbs-custom-inner">
@@ -28,7 +30,7 @@
           <div class="col-sm-6">
             <!-- Post Classic-->
             <article class="post-classic">
-              <a class="post-classic-media" href="{{ url_for('blog.single', post_id=post.id) }}">
+              <a class="post-classic-media" href="{{ url_for('blog.post', post_id=post.id) }}">
                 <img src="{{ url_for('static', filename=post.image) }}" alt="" width="370" height="264"/>
               </a>
               <ul class="post-classic-meta">
@@ -38,7 +40,7 @@
                 </li>
               </ul>
               <h4 class="post-classic-title">
-                <a href="{{ url_for('blog.single', post_id=post.id) }}">{{ post.title }}</a>
+                <a href="{{ url_for('blog.post', post_id=post.id) }}">{{ post.title }}</a>
               </h4>
             </article>
           </div>
@@ -96,4 +98,6 @@
     </article>
   </div>
 </section>
+
+{% include 'includes/footer.html' %}
 {% endblock %} 

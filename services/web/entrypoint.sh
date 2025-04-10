@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ "$DATABASE" = "postgres" ]
 then
@@ -12,5 +12,6 @@ then
 fi
 
 python manage.py create_db
+python project/data/load_mock_data.py
 
 exec "$@"

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash
 from project.models import Post, Category, Tag, Comment
 from project import db
 from datetime import datetime
@@ -50,7 +50,7 @@ tags = [
 
 about_text = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam'
 
-@bp.route('/index')
+@bp.route('/')
 def index():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
@@ -62,7 +62,9 @@ def index():
 def grid():
     page = request.args.get('page', 1, type=int)
     posts = Post.query.order_by(Post.created_at.desc()).paginate(page=page, per_page=9)
-    return render_template('blog/grid.html', posts=posts)
+    categories = Category.query.all()
+    tags = Tag.query.all()
+    return render_template('blog/grid.html', posts=posts, categories=categories, tags=tags)
 
 @bp.route('/sidebar')
 def sidebar():
@@ -72,48 +74,47 @@ def sidebar():
     tags = Tag.query.all()
     popular_posts = Post.query.order_by(Post.created_at.desc()).limit(5).all()
     return render_template('blog/sidebar.html', 
-                         posts=posts,
-                         categories=categories,
+                         posts=posts, 
+                         categories=categories, 
                          tags=tags,
                          popular_posts=popular_posts)
 
 @bp.route('/<int:post_id>')
-def single_post(post_id):
+def post(post_id):
     post = Post.query.get_or_404(post_id)
-    comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.created_at.desc()).all()
     categories = Category.query.all()
     tags = Tag.query.all()
-    popular_posts = Post.query.order_by(Post.created_at.desc()).limit(5).all()
+    comments = post.comments.order_by(Comment.created_at.desc()).all()
     return render_template('blog/single.html', 
                          post=post, 
-                         comments=comments,
-                         categories=categories,
+                         categories=categories, 
                          tags=tags,
-                         popular_posts=popular_posts)
+                         comments=comments)
 
 @bp.route('/category/<category>')
 def category(category):
+    category = Category.query.filter_by(name=category).first_or_404()
     page = request.args.get('page', 1, type=int)
-    category_obj = Category.query.filter_by(name=category).first_or_404()
-    posts = Post.query.filter_by(category_id=category_obj.id).order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
+    posts = Post.query.filter_by(category=category).order_by(
+        Post.created_at.desc()).paginate(page=page, per_page=6)
     categories = Category.query.all()
     tags = Tag.query.all()
     return render_template('blog/index.html', 
                          posts=posts, 
-                         categories=categories,
+                         categories=categories, 
                          tags=tags,
                          current_category=category)
 
 @bp.route('/tag/<tag>')
 def tag(tag):
+    tag = Tag.query.filter_by(name=tag).first_or_404()
     page = request.args.get('page', 1, type=int)
-    tag_obj = Tag.query.filter_by(name=tag).first_or_404()
-    posts = Post.query.filter(Post.tags.any(id=tag_obj.id)).order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
+    posts = tag.posts.order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
     categories = Category.query.all()
     tags = Tag.query.all()
     return render_template('blog/index.html', 
                          posts=posts, 
-                         categories=categories,
+                         categories=categories, 
                          tags=tags,
                          current_tag=tag)
 
@@ -121,36 +122,62 @@ def tag(tag):
 def add_comment(post_id):
     post = Post.query.get_or_404(post_id)
     
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
-    email = request.form.get('email')
-    content = request.form.get('content')
-    
-    if not all([first_name, last_name, email, content]):
+    if not request.form.get('first_name') or \
+       not request.form.get('last_name') or \
+       not request.form.get('email') or \
+       not request.form.get('content'):
         flash('Пожалуйста, заполните все поля', 'error')
-        return redirect(url_for('blog.single_post', post_id=post_id))
+        return redirect(url_for('blog.post', post_id=post_id))
     
     comment = Comment(
-        first_name=first_name,
-        last_name=last_name,
-        email=email,
-        content=content,
+        first_name=request.form['first_name'],
+        last_name=request.form['last_name'],
+        email=request.form['email'],
+        content=request.form['content'],
         post_id=post_id
     )
-    
     db.session.add(comment)
     db.session.commit()
     
-    flash('Ваш комментарий добавлен', 'success')
-    return redirect(url_for('blog.single_post', post_id=post_id))
+    flash('Ваш комментарий добавлен!', 'success')
+    return redirect(url_for('blog.post', post_id=post_id))
 
 @bp.route('/archive/<int:year>/<int:month>')
 def archive(year, month):
-    # Здесь будет логика фильтрации постов по архиву
-    return render_template('blog/archive.html', posts=posts, year=year, month=month)
+    start_date = datetime(year, month, 1)
+    if month == 12:
+        end_date = datetime(year + 1, 1, 1)
+    else:
+        end_date = datetime(year, month + 1, 1)
+    
+    page = request.args.get('page', 1, type=int)
+    posts = Post.query.filter(
+        Post.created_at >= start_date,
+        Post.created_at < end_date
+    ).order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
+    
+    categories = Category.query.all()
+    tags = Tag.query.all()
+    return render_template('blog/index.html', 
+                         posts=posts, 
+                         categories=categories, 
+                         tags=tags,
+                         archive_date=start_date)
 
 @bp.route('/search')
 def search():
     query = request.args.get('q', '')
-    # Здесь будет логика поиска постов
-    return render_template('blog/search-results.html', posts=posts, query=query) 
+    page = request.args.get('page', 1, type=int)
+    
+    posts = Post.query.filter(
+        Post.title.ilike(f'%{query}%') | 
+        Post.content.ilike(f'%{query}%')
+    ).order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
+    
+    categories = Category.query.all()
+    tags = Tag.query.all()
+    return render_template('blog/index.html', 
+                         posts=posts, 
+                         categories=categories, 
+                         tags=tags,
+                         search_query=query) 

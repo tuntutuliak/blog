@@ -1,15 +1,18 @@
 import os
 from flask import Flask, jsonify, send_from_directory, request
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from werkzeug.utils import secure_filename
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object("project.config.Config")
     
     db.init_app(app)
+    migrate.init_app(app, db)
     
     from project.main import bp as main_bp
     app.register_blueprint(main_bp)
@@ -19,10 +22,6 @@ def create_app():
     
     from project.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
-
-    @app.route("/")
-    def hello_world():
-        return jsonify(hello="world")
 
     @app.route("/static/<path:filename>")
     def staticfiles(filename):
