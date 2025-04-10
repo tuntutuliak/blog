@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from project.main import bp
 from project.models import Post, Category, Tag
 from project import db
@@ -33,6 +33,19 @@ def single_cruise():
 @bp.route('/contacts')
 def contacts():
     return render_template('main/contacts.html')
+
+@bp.route('/contact', methods=['POST'])
+def contact():
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    email = request.form.get('email')
+    phone = request.form.get('phone')
+    message = request.form.get('message')
+    
+    # Здесь можно добавить логику отправки email или сохранения в базу данных
+    
+    flash('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.', 'success')
+    return redirect(url_for('main.contacts'))
 
 @bp.route('/gallery')
 def gallery():
