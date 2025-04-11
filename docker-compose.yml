@@ -17,8 +17,8 @@ services:
       - FLASK_ENV=development
       - FLASK_DEBUG=1
     command: >
-      sh -c "python manage.py run -h 0.0.0.0 &
-             python -m project.load_mock_data"
+      sh -c "python -m project.load_mock_data;
+             gunicorn --bind 0.0.0.0:5000 'project:create_app()'"
   db:
     image: postgres:13-alpine
     volumes:

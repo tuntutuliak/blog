@@ -14,6 +14,9 @@ def load_mock_data():
         # Очистка существующих данных только если таблицы существуют
         if 'comments' in inspector.get_table_names():
             Comment.query.delete()
+        if 'post_tags' in inspector.get_table_names():
+            post_tags = db.Table('post_tags', db.metadata, extend_existing=True)
+            db.session.execute(post_tags.delete())
         if 'posts' in inspector.get_table_names():
             Post.query.delete()
         if 'categories' in inspector.get_table_names():
