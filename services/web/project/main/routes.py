@@ -84,4 +84,17 @@ def book():
     check_out = request.form.get('check_out')
     guests = request.form.get('guests')
     # Здесь будет логика бронирования
-    return redirect(url_for('main.booking')) 
+    return redirect(url_for('main.booking'))
+
+@bp.route('/category/<int:category_id>')
+def category(category_id):
+    category = Category.query.get_or_404(category_id)
+    posts = Post.query.filter_by(category_id=category_id).order_by(Post.created_at.desc()).all()
+    categories = Category.query.all()
+    tags = Tag.query.all()
+    
+    return render_template('main/category.html',
+                          category=category,
+                          posts=posts,
+                          categories=categories,
+                          tags=tags) 

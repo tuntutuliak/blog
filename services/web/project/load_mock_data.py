@@ -42,11 +42,12 @@ def load_mock_data():
                 
             user = User(
                 email=user_data['email'],
-                password=generate_password_hash(user_data['password']),
                 name=user_data['name'],
-                role=user_data['role'],
-                active=True
+                password=user_data['password'],
+                role=user_data['role']
             )
+            if 'active' in user_data:
+                user.active = user_data['active']
             db.session.add(user)
             users[user_data['email']] = user
         db.session.commit()

@@ -3,11 +3,11 @@
         <h3 class="widget-title">Категории</h3>
         <ul class="list-unstyled">
             {% for category in categories %}
-            <li>
-                <a href="{{ url_for('blog.category', category=category.name) }}">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{{ url_for('main.category', category_id=category.id) }}" class="text-decoration-none">
                     {{ category.name }}
-                    <span class="badge bg-primary">{{ category.posts.count() }}</span>
                 </a>
+                <span class="badge bg-primary">{{ category.get_posts_count() }}</span>
             </li>
             {% endfor %}
         </ul>
