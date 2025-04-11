@@ -16,18 +16,18 @@ def init_db():
         if Category.query.first() is None:
             # Создаем категории
             categories = [
-                Category(name='News', description='Latest cruise news and updates'),
-                Category(name='Cruises', description='Information about different cruises'),
-                Category(name='Traveling', description='Travel tips and guides'),
-                Category(name='Tips', description='Useful tips for cruise travelers'),
-                Category(name='Ships', description='Information about cruise ships')
+                Category(name='News', description='Последние новости и обновления'),
+                Category(name='Tutorials', description='Информация о различных туториалах'),
+                Category(name='Reviews', description='Обзоры и отзывы'),
+                Category(name='Tips', description='Полезные советы для разработчиков'),
+                Category(name='Tools', description='Информация об инструментах разработки')
             ]
             db.session.add_all(categories)
             
             # Создаем теги
             tags = [
                 Tag(name='Cruises'),
-                Tag(name='Tips'),
+                Tag(name='Tutorials'),
                 Tag(name='Ships'),
                 Tag(name='Recommendations'),
                 Tag(name='Traveling'),
@@ -45,14 +45,14 @@ def init_db():
             # Создаем тестовые посты
             posts = [
                 Post(
-                    title='Why Choose Cruises Instead of Tours',
+                    title='Почему выбирают наши туториалы',
                     content='Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
                     image='images/sidebar-blog-1-370x264.jpg',
                     category_id=1,
                     author_id=1
                 ),
                 Post(
-                    title='5 Adventure Cruises You Cannot Miss',
+                    title='5 обучающих туториалов, которые нельзя пропустить',
                     content='Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...',
                     image='images/sidebar-blog-2-370x264.jpg',
                     category_id=2,

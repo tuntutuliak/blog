@@ -23,13 +23,13 @@ def about():
     latest_posts = Post.query.order_by(Post.created_at.desc()).limit(4).all()
     return render_template('main/about.html', latest_posts=latest_posts)
 
-@bp.route('/cruises')
-def cruises():
-    return render_template('main/cruises.html')
+@bp.route('/tutorials')
+def tutorials():
+    return render_template('main/tutorials.html')
 
-@bp.route('/single-cruise')
-def single_cruise():
-    return render_template('main/single-cruise.html')
+@bp.route('/single-tutorial')
+def single_tutorial():
+    return render_template('main/single-tutorial.html')
 
 @bp.route('/contacts')
 def contacts():

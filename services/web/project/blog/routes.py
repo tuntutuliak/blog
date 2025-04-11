@@ -84,8 +84,8 @@ def post(post_id):
     post = Post.query.get_or_404(post_id)
     categories = Category.query.all()
     tags = Tag.query.all()
-    comments = post.comments.order_by(Comment.created_at.desc()).all()
-    return render_template('blog/single.html', 
+    comments = Comment.query.filter_by(post_id=post_id).order_by(Comment.created_at.desc()).all()
+    return render_template('blog/post.html', 
                          post=post, 
                          categories=categories, 
                          tags=tags,
@@ -105,11 +105,11 @@ def category(category):
                          tags=tags,
                          current_category=category)
 
-@bp.route('/tag/<tag>')
-def tag(tag):
-    tag = Tag.query.filter_by(name=tag).first_or_404()
+@bp.route('/tag/<tag_name>')
+def tag(tag_name):
+    tag = Tag.query.filter_by(name=tag_name).first_or_404()
     page = request.args.get('page', 1, type=int)
-    posts = tag.posts.order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
+    posts = Post.query.join(post_tags).filter(post_tags.c.tag_id == tag.id).order_by(Post.created_at.desc()).paginate(page=page, per_page=6)
     categories = Category.query.all()
     tags = Tag.query.all()
     return render_template('blog/index.html', 

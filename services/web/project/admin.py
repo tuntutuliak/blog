@@ -5,6 +5,7 @@ from flask import redirect, url_for
 from project.models import db, User, Category, Tag, Post, Comment
 from flask_admin.form import ImageUploadField
 import os
+from werkzeug.security import generate_password_hash
 
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media')
 
@@ -16,65 +17,65 @@ class SecureModelView(ModelView):
         return redirect(url_for('main.index'))
 
 class UserAdmin(SecureModelView):
-    column_exclude_list = ['password_hash']
-    form_excluded_columns = ['password_hash']
-    column_list = ['email', 'name', 'role', 'active', 'created_at']
-    form_columns = ['email', 'name', 'role', 'active', 'bio', 'avatar', 'social_links']
-    
-    def on_model_change(self, form, model, is_created):
-        if is_created:
-            model.set_password('password')
+    column_list = ['id', 'email', 'name', 'role', 'active', 'created_at']
+    column_searchable_list = ['email', 'name']
+    column_filters = ['role', 'active', 'created_at']
+    form_columns = ['email', 'password', 'name', 'role', 'active', 'bio', 'avatar', 'social_links']
+    column_labels = {
+        'name': 'Имя',
+        'email': 'Email',
+        'role': 'Роль',
+        'active': 'Активен',
+        'created_at': 'Дата создания',
+        'bio': 'Биография',
+        'avatar': 'Аватар',
+        'social_links': 'Социальные сети'
+    }
 
 class PostAdmin(SecureModelView):
-    column_list = ['title', 'category', 'user', 'created_at', 'image']
+    column_list = ['id', 'title', 'user', 'category', 'created_at', 'updated_at']
     column_searchable_list = ['title', 'content']
-    column_filters = ['created_at', 'category', 'user']
-    form_columns = ['title', 'content', 'image', 'category', 'user', 'tags']
-    
-    form_extra_fields = {
-        'image': ImageUploadField('Image',
-                                base_path=UPLOAD_FOLDER,
-                                relative_path='posts/',
-                                allowed_extensions=['jpg', 'jpeg', 'png', 'gif'])
+    column_filters = ['category', 'user', 'created_at']
+    form_columns = ['title', 'content', 'user', 'category', 'tags', 'image']
+    column_labels = {
+        'title': 'Заголовок',
+        'content': 'Содержание',
+        'user': 'Автор',
+        'category': 'Категория',
+        'tags': 'Теги',
+        'image': 'Изображение',
+        'created_at': 'Дата создания',
+        'updated_at': 'Дата обновления'
     }
-    
-    def _list_title(view, context, model, name):
-        return model.title
-    
-    def _list_category(view, context, model, name):
-        return model.category.name if model.category else ''
-    
-    def _list_author(view, context, model, name):
-        return model.user.name if model.user else ''
-    
-    column_formatters = {
-        'title': _list_title,
-        'category': _list_category,
-        'user': _list_author
+
+class CategoryAdmin(SecureModelView):
+    column_list = ['name', 'description', 'get_posts_count']
+    column_searchable_list = ['name', 'description']
+    column_filters = ['name']
+    form_columns = ['name', 'description']
+    column_labels = {
+        'name': 'Название',
+        'description': 'Описание',
+        'get_posts_count': 'Количество постов'
     }
-    
-    form_widget_args = {
-        'content': {'rows': 20, 'style': 'width: 100%'},
-        'image': {'style': 'width: 100%'}
-    }
-    
-    def get_form_choices(self):
-        return {
-            'category': [(c.id, c.name) for c in Category.query.all()],
-            'user': [(u.id, u.name) for u in User.query.all()]
-        }
 
 class CommentAdmin(SecureModelView):
-    column_list = ['post', 'first_name', 'last_name', 'email', 'created_at']
-    column_searchable_list = ['content', 'email']
-    column_filters = ['created_at', 'post']
-    form_columns = ['post', 'first_name', 'last_name', 'email', 'content']
+    column_list = ['id', 'first_name', 'last_name', 'email', 'content', 'post', 'created_at']
+    column_searchable_list = ['content', 'first_name', 'last_name', 'email']
+    column_filters = ['post', 'created_at']
+    form_columns = ['first_name', 'last_name', 'email', 'content', 'post']
+    column_labels = {
+        'first_name': 'Имя',
+        'last_name': 'Фамилия',
+        'email': 'Email',
+        'content': 'Содержание',
+        'post': 'Пост',
+        'created_at': 'Дата создания'
+    }
 
 def init_admin(app):
-    admin = Admin(app, name='Админ-панель', template_mode='bootstrap4')
-    
-    admin.add_view(UserAdmin(User, db.session, name='Пользователи'))
-    admin.add_view(SecureModelView(Category, db.session, name='Категории'))
-    admin.add_view(SecureModelView(Tag, db.session, name='Теги'))
-    admin.add_view(PostAdmin(Post, db.session, name='Посты'))
-    admin.add_view(CommentAdmin(Comment, db.session, name='Комментарии')) 
+    admin = Admin(app, name='Blog Admin', template_mode='bootstrap4')
+    admin.add_view(UserAdmin(User, db.session))
+    admin.add_view(PostAdmin(Post, db.session))
+    admin.add_view(CategoryAdmin(Category, db.session))
+    admin.add_view(CommentAdmin(Comment, db.session))

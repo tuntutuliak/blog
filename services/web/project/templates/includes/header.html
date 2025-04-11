@@ -15,31 +15,33 @@
             </a>
             <div class="rd-navbar-block">
               <ul class="list-inline-bordered">
+                {% if current_user.is_authenticated and current_user.is_admin() %}
                 <li>
                   <button class="rd-navbar-popup-toggle text-uppercase font-weight-light" data-rd-navbar-toggle="#rd-navbar-login-1">
-                    <span class="mdi mdi-pencil"><span class="hidden-info font-weight-light"> Book now</span></span>
+                    <span class="mdi mdi-pencil"><span class="hidden-info font-weight-light"> Разместить</span></span>
                   </button>
                   <div class="rd-navbar-popup" id="rd-navbar-login-1">
-                    <h4>Book now</h4>
+                    <h4>Написать пост</h4>
                     <form class="rd-form rd-form-small" method="POST" action="{{ url_for('main.book') }}">
                       <div class="form-wrap">
                         <input class="form-input" id="register-name-1" type="text" name="check_in" data-constraints="@Required">
-                        <label class="form-label" for="register-name-1">Check in</label>
+                        <label class="form-label" for="register-name-1">Тема</label>
                       </div>
                       <div class="form-wrap">
                         <input class="form-input" id="register-name-2" type="text" name="check_out" data-constraints="@Required">
-                        <label class="form-label" for="register-name-2">Check out</label>
+                        <label class="form-label" for="register-name-2">Язык</label>
                       </div>
                       <div class="form-wrap">
                         <input class="form-input" id="register-name-3" type="text" name="guests" data-constraints="@Required">
-                        <label class="form-label" for="register-name-3">Guests</label>
+                        <label class="form-label" for="register-name-3">Текст</label>
                       </div>
                       <div class="form-wrap">
-                        <button class="button button-block button-primary button-winona" type="submit">Book Now</button>
+                        <button class="button button-block button-primary button-winona" type="submit">Разместить</button>
                       </div>
                     </form>
                   </div>
                 </li>
+                {% endif %}
                 <li><a class="link-title" href="tel:#"><span class="mdi mdi-cellphone-android"><span class="text-subtitle hidden-info font-weight-light"> +1-800-1234-567</span></span></a></li>
               </ul>
               <button class="rd-navbar-search-toggle" data-rd-navbar-toggle="#rd-navbar-search-1"><span></span></button>
@@ -64,20 +66,13 @@
             <!-- RD Navbar Nav-->
             <ul class="rd-navbar-nav">
               <li class="rd-nav-item {% if request.endpoint == 'main.index' %}active{% endif %}">
-                <a class="rd-nav-link" href="{{ url_for('main.index') }}">Home</a>
+                <a class="rd-nav-link" href="{{ url_for('main.index') }}">Главная</a>
               </li>
               <li class="rd-nav-item {% if request.endpoint == 'main.about' %}active{% endif %}">
-                <a class="rd-nav-link" href="{{ url_for('main.about') }}">About Us</a>
-              </li>
-              <li class="rd-nav-item {% if request.endpoint == 'main.cruises' %}active{% endif %}">
-                <a class="rd-nav-link" href="{{ url_for('main.cruises') }}">Cruises</a>
-                <!-- RD Navbar Dropdown-->
-                <ul class="rd-menu rd-navbar-dropdown">
-                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('main.single_cruise') }}">Single Cruise</a></li>
-                </ul>
+                <a class="rd-nav-link" href="{{ url_for('main.about') }}">О проекте</a>
               </li>
               <li class="rd-nav-item {% if request.endpoint.startswith('blog.') %}active{% endif %}">
-                <a class="rd-nav-link" href="{{ url_for('blog.index') }}">Blog</a>
+                <a class="rd-nav-link" href="{{ url_for('blog.index') }}">Блог</a>
                 <!-- RD Navbar Dropdown-->
                 <ul class="rd-menu rd-navbar-dropdown">
                   <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.grid') }}">Grid Blog</a></li>
