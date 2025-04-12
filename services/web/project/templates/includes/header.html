@@ -11,7 +11,7 @@
             <button class="rd-navbar-toggle" data-rd-navbar-toggle="#rd-navbar-nav-wrap-1"><span></span></button>
             <!-- RD Navbar Brand-->
             <a class="rd-navbar-brand" href="{{ url_for('main.index') }}">
-              <img src="{{ url_for('static', filename='images/logo-default-135x43.png') }}" alt="" width="135" height="43"/>
+              <img src="{{ url_for('static', filename='images/Ladybug_256.png') }}" alt="" width="135" height="43"/>
             </a>
             <div class="rd-navbar-block">
               <ul class="list-inline-bordered">
@@ -64,9 +64,9 @@
                 <a class="rd-nav-link" href="{{ url_for('blog.index') }}">Блог</a>
                 <!-- RD Navbar Dropdown-->
                 <ul class="rd-menu rd-navbar-dropdown">
-                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.grid') }}">Grid Blog</a></li>
-                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.sidebar') }}">Sidebar Blog</a></li>
-                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.post', post_id=1) }}">Single Blog Post</a></li>
+                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.grid') }}">Обзоры</a></li>
+                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.sidebar') }}">Каталог</a></li>
+                  <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="{{ url_for('blog.post', post_id=1) }}">Туториалы</a></li>
                 </ul>
               </li>
               <li class="rd-nav-item {% if request.endpoint == 'main.contacts' %}active{% endif %}">

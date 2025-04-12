@@ -1,7 +1,6 @@
 #!/bin/sh
 
-if [ "$DATABASE" = "postgres" ]
-then
+if [ "$DATABASE" = "postgres" ]; then
     echo "Waiting for postgres..."
 
     while ! nc -z $SQL_HOST $SQL_PORT; do
@@ -11,22 +10,30 @@ then
     echo "PostgreSQL started"
 fi
 
-# Initialize migrations
 echo "Initializing migrations..."
-python manage.py db init
+python manage.py db init || true  # не падаем, если уже инициализировано
 
-# Create migrations
 echo "Creating migrations..."
-python manage.py db migrate
+python manage.py db migrate || true
 
-# Apply migrations
 echo "Applying migrations..."
 python manage.py db upgrade
 
-# Load mock data
-echo "Loading mock data..."
-python -m project.load_mock_data
+# Условная загрузка mock-данных — только если в базе нет пользователей
+echo "Checking if we need to load mock data..."
+python -c "
+from project import create_app, db
+from project.models import User
+
+app = create_app()
+with app.app_context():
+    if db.session.query(User).count() == 0:
+        from project.load_mock_data import load_mock_data
+        load_mock_data()
+        print('Mock data loaded.')
+    else:
+        print('Skipping mock data load — users already exist.')
+"
 
 echo "Initialization completed!"
-
-exec "$@" 
+exec "$@"

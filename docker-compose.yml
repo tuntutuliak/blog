@@ -5,6 +5,7 @@ services:
     build: ./services/web
     volumes:
       - ./services/web/:/usr/src/app/
+      - ./services/web/media:/usr/src/app/media
     ports:
       - 5000:5000
     env_file:

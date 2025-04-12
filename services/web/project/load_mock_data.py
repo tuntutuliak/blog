@@ -83,7 +83,7 @@ def load_mock_data():
                 content=post_data['content'],
                 image=post_data.get('image', ''),
                 category_id=categories[post_data['category']].id,
-                author_id=users[author_email].id
+                user_id=users[author_email].id
             )
             
             # Устанавливаем даты после создания объекта

@@ -7,7 +7,9 @@
                 <a href="{{ url_for('main.category', category_id=category.id) }}" class="text-decoration-none">
                     {{ category.name }}
                 </a>
-                <span class="badge bg-primary">{{ category.get_posts_count() }}</span>
+             <span class="badge bg-primary">
+                {{ "Постов: " ~ category.posts_count if category.posts_count > 0 else "Нет постов" }}
+             </span>
             </li>
             {% endfor %}
         </ul>

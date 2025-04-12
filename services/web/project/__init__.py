@@ -4,6 +4,7 @@ from flask_login import LoginManager
 from werkzeug.utils import secure_filename
 from project.config import Config
 from project.models import db
+import os
 
 migrate = Migrate()
 login_manager = LoginManager()
@@ -12,7 +13,7 @@ login_manager.login_message = 'Пожалуйста, войдите для до�
 
 
 def create_app(config_class=Config):
-    app = Flask(__name__)
+    app = Flask(__name__)  # Только один раз создаём приложение
     app.config.from_object(config_class)
 
     db.init_app(app)
@@ -20,6 +21,9 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
 
     from project.models import User
+
+    # Настройка папки для медиа-файлов
+    app.config['MEDIA_FOLDER'] = os.path.join(app.root_path, 'services', 'web', 'media')
 
     @login_manager.user_loader
     def load_user(id):
@@ -38,25 +42,31 @@ def create_app(config_class=Config):
     from project.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
 
+    # Маршрут для статических файлов
     @app.route("/static/<path:filename>")
     def staticfiles(filename):
         return send_from_directory(app.config["STATIC_FOLDER"], filename)
 
+    # Маршрут для медиа-файлов
     @app.route("/media/<path:filename>")
     def mediafiles(filename):
         return send_from_directory(app.config["MEDIA_FOLDER"], filename)
 
+    # Маршрут для загрузки файлов
     @app.route("/upload", methods=["GET", "POST"])
     def upload_file():
         if request.method == "POST":
             file = request.files["file"]
             filename = secure_filename(file.filename)
+            # Сохраняем файл с уникальным именем
             file.save(os.path.join(app.config["MEDIA_FOLDER"], filename))
+            return f'Файл {filename} загружен успешно!'
+
         return """
         <!doctype html>
-        <title>upload new File</title>
+        <title>Загрузить новый файл</title>
         <form action="" method=post enctype=multipart/form-data>
-          <p><input type=file name=file><input type=submit value=Upload>
+          <p><input type=file name=file><input type=submit value=Загрузить>
         </form>
         """
 

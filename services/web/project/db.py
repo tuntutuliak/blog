@@ -49,14 +49,14 @@ def init_db():
                     content='Lorem ipsum dolor sit amet, consectetur adipiscing elit...',
                     image='images/sidebar-blog-1-370x264.jpg',
                     category_id=1,
-                    author_id=1
+                    user_id=1
                 ),
                 Post(
                     title='5 обучающих туториалов, которые нельзя пропустить',
                     content='Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...',
                     image='images/sidebar-blog-2-370x264.jpg',
                     category_id=2,
-                    author_id=1
+                    user_id=1
                 )
             ]
             db.session.add_all(posts)

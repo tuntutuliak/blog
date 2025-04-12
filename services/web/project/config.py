@@ -16,7 +16,7 @@ class Config(object):
     STATIC_FOLDER = os.path.join(basedir, "static")
 
     # Папка для медиа-файлов (загруженные пользователями картинки и т.п.)
-    MEDIA_FOLDER = os.path.join(basedir, '..', 'media')  # services/web/media
+    MEDIA_FOLDER = os.path.join(basedir, 'services', 'web', 'media')
 
     # Папка для upload-файлов, если отдельно используешь (может быть объединена с MEDIA_FOLDER)
     UPLOAD_FOLDER = os.path.join(

@@ -6,12 +6,12 @@
 {% include 'includes/header.html' %}
 
 <!-- Breadcrumbs -->
-<section class="breadcrumbs-custom bg-image context-dark" style="background-image: url({{ url_for('static', filename='images/bg-about-us.jpg') }});">
+<section class="breadcrumbs-custom bg-image context-dark" style="background-image: url({{ url_for('static', filename='images/bg-image-1.jpg') }});">
   <div class="breadcrumbs-custom-inner">
     <div class="container breadcrumbs-custom-container">
       <div class="breadcrumbs-custom-main">
-        <h6 class="breadcrumbs-custom-subtitle title-decorated">О нас</h6>
-        <h1 class="breadcrumbs-custom-title">О нас</h1>
+        <h6 class="breadcrumbs-custom-subtitle title-decorated">О блоге</h6>
+        <h1 class="breadcrumbs-custom-title">HTML5 игры</h1>
       </div>
       <ul class="breadcrumbs-custom-path">
         <li><a href="{{ url_for('main.index') }}">Главная</a></li>
@@ -27,17 +27,17 @@
     <div class="row row-50 justify-content-center justify-content-lg-between">
       <div class="col-md-10 col-lg-6">
         <h2 class="wow-outer font-weight-bold text-gray-800"><span class="wow slideInUp">Обзор</span></h2>
-        <h5 class="offset-top-3 text-gray-800 font-weight-light">Мы предлагаем незабываемые круизные путешествия по всему миру</h5>
-        <p>Наша компания специализируется на организации круизных туров высочайшего качества. Мы работаем с лучшими круизными лайнерами и предлагаем разнообразные маршруты, подходящие как для семейного отдыха, так и для романтических путешествий.</p>
+        <h5 class="offset-top-3 text-gray-800 font-weight-light">HTML5-игры – незатейливый способ войти в геймдев-индустрию для тех, кто только осваивает программирование.</h5>
+        <p>Достаточно знать стандартные для веба HTML, CSS и JavaScript. Код не придется писать с нуля: разработчики уже написали движки для создания игр. У пользователей хорошо заходят маленькие игры и простые динамики.</p>
         <div class="group group-middle">
-          <a class="button button-primary button-winona button-secondary" href="#our-history" data-waypoint-to="#our-history">Наша История</a>
+          <a class="button button-primary button-winona button-secondary" href="{{ url_for('main.index') }}" data-waypoint-to="#our-history">Далее</a>
           <a class="button button-icon button-icon-left button-primary-outline button-winona button-secondary" href="#">
-            <span class="icon mdi mdi-facebook-messenger facebook-icon"></span>Messenger
+            <span class="icon mdi mdi-discord-messenger discord-icon"></span>Discord
           </a>
         </div>
       </div>
       <div class="col-md-10 col-lg-6 col-xl-5">
-        <img class="img-responsive" src="{{ url_for('static', filename='images/large-features-1-560x480.png') }}" alt="" width="560" height="480"/>
+        <img class="img-responsive" src="{{ url_for('static', filename='images/about_560_480.png') }}" alt="" width="560" height="480"/>
       </div>
     </div>
   </div>
@@ -50,35 +50,35 @@
     <article class="timeline-classic">
       <div class="timeline-classic-item">
         <div class="timeline-classic-item-aside">
-          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/timeline-1-390x250.jpg') }}" alt="" width="390" height="250"/>
+          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/grid-layout-2-370x256.jpg') }}" alt="" width="390" height="250"/>
         </div>
         <div class="timeline-classic-item-divider"></div>
         <div class="timeline-classic-item-main">
-          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Разнообразные Туториалы</span></h2>
-          <h5 class="offset-top-3 text-white font-weight-light">Широкий выбор маршрутов и направлений</h5>
-          <p class="text-white-darker">Мы предлагаем круизы различной длительности и направленности: от коротких weekend-круизов до длительных кругосветных путешествий. Каждый маршрут тщательно продуман и включает посещение самых интересных портов и достопримечательностей.</p>
+          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Легкость создания</span></h2>
+          <h5 class="offset-top-3 text-white font-weight-light">Достаточно знать стандартные для веба HTML, CSS и JavaScrip</h5>
+          <p class="text-white-darker">Код не придется писать с нуля: разработчики уже написали движки для создания игр. У пользователей хорошо заходят маленькие игры и простые динамики.</p>
         </div>
       </div>
       <div class="timeline-classic-item">
         <div class="timeline-classic-item-aside">
-          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/timeline-2-390x250.jpg') }}" alt="" width="390" height="250"/>
+          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/grid-layout-1-370x256.jpg') }}" alt="" width="390" height="250"/>
         </div>
         <div class="timeline-classic-item-divider"></div>
         <div class="timeline-classic-item-main">
-          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Незабываемые Впечатления</span></h2>
-          <h5 class="offset-top-3 text-white font-weight-light">Каждое путешествие - это особенное приключение</h5>
-          <p class="text-white-darker">На борту наших круизных лайнеров вас ждет первоклассный сервис, разнообразные развлечения и изысканная кухня. Мы создаем все условия для того, чтобы ваш отдых был максимально комфортным и запоминающимся.</p>
+          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Кроссплатформенность</span></h2>
+          <h5 class="offset-top-3 text-white font-weight-light">В игру можно играть абсолютно везде,  с телефона, с планшета и компьютера</h5>
+          <p class="text-white-darker"> Соответственно можно делать многопользовательские игры.</p>
         </div>
       </div>
       <div class="timeline-classic-item">
         <div class="timeline-classic-item-aside">
-          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/timeline-3-390x250.jpg') }}" alt="" width="390" height="250"/>
+          <img class="timeline-classic-item-image" src="{{ url_for('static', filename='images/grid-layout-9-370x256.jpg') }}" alt="" width="390" height="250"/>
         </div>
         <div class="timeline-classic-item-divider"></div>
         <div class="timeline-classic-item-main">
-          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Лучший Сервис</span></h2>
-          <h5 class="offset-top-3 text-white font-weight-light">Индивидуальный подход к каждому клиенту</h5>
-          <p class="text-white-darker">Наша команда профессионалов обеспечивает высочайший уровень обслуживания на всех этапах путешествия. Мы внимательно относимся к пожеланиям каждого клиента и стремимся превзойти все ожидания.</p>
+          <h2 class="wow-outer font-weight-bold text-white"><span class="wow slideInUp">Доступность площадок</span></h2>
+          <h5 class="offset-top-3 text-white font-weight-light">Разработчики публикуют игры</h5>
+          <p class="text-white-darker">Разработчики публикуют игры в AppStore и Google Play, на специальных площадках, платформах социальных сетей и мессенджеров.</p>
         </div>
       </div>
     </article>
@@ -88,15 +88,15 @@
 <!--Testimonials-->
 <section class="section section-lg text-center">
   <div class="container">
-    <h2 class="wow-outer font-weight-bold text-gray-800"><span class="wow slideInUp">Отзывы</span></h2>
+    <h2 class="wow-outer font-weight-bold text-gray-800"><span class="wow slideInUp">О себе</span></h2>
     <div class="slick-widget-testimonials wow fadeIn">
       <div class="slick-slider carousel-parent" data-arrows="false" data-loop="true" data-dots="false" data-swipe="false" data-items="1" data-child="#child-carousel">
         <div class="item">
           <blockquote class="quote-light">
-            <cite class="quote-light-cite">Елена Петрова</cite>
-            <p class="quote-light-caption">Постоянный клиент</p>
+            <cite class="quote-light-cite">Иван Дунупин</cite>
+            <p class="quote-light-caption">Энтузиаст HTML5-игр и геймдева</p>
             <div class="quote-light-text">
-              <p>Это было потрясающее путешествие! Прекрасный сервис, внимательный персонал и незабываемые впечатления. Обязательно воспользуюсь услугами компании снова.</p>
+              <p>Этот блог вырос из уроков программирования для детей.<br/> Здесь — простые идеи и живой подход.</p>
             </div>
           </blockquote>
         </div>
@@ -105,7 +105,7 @@
             <cite class="quote-light-cite">Александр Иванов</cite>
             <p class="quote-light-caption">Постоянный клиент</p>
             <div class="quote-light-text">
-              <p>Отличная организация круиза! Все было продумано до мелочей. Особенно порадовала насыщенная развлекательная программа и экскурсии.</p>
+              <p>Блог вырос из уроков программирования для детей. Здесь — простые идеи и живой подход.</p>
             </div>
           </blockquote>
         </div>
