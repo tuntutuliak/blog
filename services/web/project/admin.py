@@ -1,20 +1,21 @@
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_login import current_user
-from flask import redirect, url_for
+from flask import redirect, url_for, current_app
 from project.models import db, User, Category, Tag, Post, Comment
 from flask_admin.form import ImageUploadField
 import os
 from werkzeug.security import generate_password_hash
+from wtforms_sqlalchemy.fields import QuerySelectMultipleField
 
-UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media')
 
 class SecureModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated and current_user.is_admin()
-    
+
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('main.index'))
+
 
 class UserAdmin(SecureModelView):
     column_list = ['id', 'email', 'name', 'role', 'active', 'created_at']
@@ -32,11 +33,35 @@ class UserAdmin(SecureModelView):
         'social_links': 'Социальные сети'
     }
 
+
 class PostAdmin(SecureModelView):
+    def __init__(self, model, session, **kwargs):
+        super().__init__(model, session, **kwargs)
+        self.form_extra_fields = {
+            'image': ImageUploadField(
+                'Изображение',
+                base_path=current_app.config['MEDIA_FOLDER'],
+                url_relative_path='media/'
+            )
+        }
+
     column_list = ['id', 'title', 'user', 'category', 'created_at', 'updated_at']
     column_searchable_list = ['title', 'content']
     column_filters = ['category', 'user', 'created_at']
     form_columns = ['title', 'content', 'user', 'category', 'tags', 'image']
+
+    form_overrides = {
+        'tags': QuerySelectMultipleField,
+        'image': ImageUploadField
+    }
+
+    form_args = {
+        'tags': {
+            'query_factory': lambda: Tag.query.all(),
+            'get_label': 'name'
+        }
+    }
+
     column_labels = {
         'title': 'Заголовок',
         'content': 'Содержание',
@@ -48,6 +73,16 @@ class PostAdmin(SecureModelView):
         'updated_at': 'Дата обновления'
     }
 
+    def _preview_image(view, context, model, name):
+        if not model.image:
+            return ''
+        return f'<img src="/media/{model.image}" width="100">'
+
+    column_formatters = {
+        'image': _preview_image
+    }
+
+
 class CategoryAdmin(SecureModelView):
     column_list = ['name', 'description', 'get_posts_count']
     column_searchable_list = ['name', 'description']
@@ -58,6 +93,7 @@ class CategoryAdmin(SecureModelView):
         'description': 'Описание',
         'get_posts_count': 'Количество постов'
     }
+
 
 class CommentAdmin(SecureModelView):
     column_list = ['id', 'first_name', 'last_name', 'email', 'content', 'post', 'created_at']
@@ -72,6 +108,7 @@ class CommentAdmin(SecureModelView):
         'post': 'Пост',
         'created_at': 'Дата создания'
     }
+
 
 def init_admin(app):
     admin = Admin(app, name='Blog Admin', template_mode='bootstrap4')

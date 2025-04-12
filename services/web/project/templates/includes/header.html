@@ -17,29 +17,10 @@
               <ul class="list-inline-bordered">
                 {% if current_user.is_authenticated and current_user.is_admin() %}
                 <li>
-                  <button class="rd-navbar-popup-toggle text-uppercase font-weight-light" data-rd-navbar-toggle="#rd-navbar-login-1">
-                    <span class="mdi mdi-pencil"><span class="hidden-info font-weight-light"> Разместить</span></span>
+                  <button class="rd-navbar-popup-toggle text-uppercase font-weight-light"
+                          onclick="window.location.href='{{ url_for('admin.index') }}'">
+                    <span class="mdi mdi-pencil"><span class="hidden-info font-weight-light">Администрирование</span></span>
                   </button>
-                  <div class="rd-navbar-popup" id="rd-navbar-login-1">
-                    <h4>Написать пост</h4>
-                    <form class="rd-form rd-form-small" method="POST" action="{{ url_for('main.book') }}">
-                      <div class="form-wrap">
-                        <input class="form-input" id="register-name-1" type="text" name="check_in" data-constraints="@Required">
-                        <label class="form-label" for="register-name-1">Тема</label>
-                      </div>
-                      <div class="form-wrap">
-                        <input class="form-input" id="register-name-2" type="text" name="check_out" data-constraints="@Required">
-                        <label class="form-label" for="register-name-2">Язык</label>
-                      </div>
-                      <div class="form-wrap">
-                        <input class="form-input" id="register-name-3" type="text" name="guests" data-constraints="@Required">
-                        <label class="form-label" for="register-name-3">Текст</label>
-                      </div>
-                      <div class="form-wrap">
-                        <button class="button button-block button-primary button-winona" type="submit">Разместить</button>
-                      </div>
-                    </form>
-                  </div>
                 </li>
                 {% endif %}
                 <li>

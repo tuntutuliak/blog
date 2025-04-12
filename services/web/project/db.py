@@ -26,11 +26,11 @@ def init_db():
             
             # Создаем теги
             tags = [
-                Tag(name='Cruises'),
+                Tag(name='Quizzes'),
                 Tag(name='Tutorials'),
-                Tag(name='Ships'),
+                Tag(name='Languages'),
                 Tag(name='Recommendations'),
-                Tag(name='Traveling'),
+                Tag(name='Technologies'),
                 Tag(name='News')
             ]
             db.session.add_all(tags)

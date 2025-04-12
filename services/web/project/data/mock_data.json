@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "admin@example.com",
-      "password": "admin123",
+      "password": "adminuser123",
       "name": "Администратор",
       "role": "admin",
       "bio": "Главный администратор блога",
@@ -10,7 +10,7 @@
     },
     {
       "email": "author@example.com",
-      "password": "author123",
+      "password": "authoruser123",
       "name": "Автор",
       "role": "author",
       "bio": "Опытный автор блога",
